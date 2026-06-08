@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rouge Questionnaire Form</title>
+        <link rel="stylesheet" href="../formStyles.css">
+    </head>
+
+    <body>
+
+        <div class="form-container">
+            <h1>User Survey</h1>
+
+            <form id="surveyForm">
+
+                <div class="question">
+                    <label for="name">1. What is your game's name?</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="question">
+                    <label for="rougetype">2. Is it a rougelite or rougelike?</label>
+                    
+                    <label class="radio-option">
+                        <input type="radio" id="roguelite" name="rougetype" value="roguelite">
+                            Roguelite
+                    </label>
+
+                    <label class="radio-option">
+                        <input type="radio" id="rougelike" name="rougetype" value="rougelike">
+                            Rougelike
+                    </label>
+                </div>
+
+                <div class="question">
+                    <label for="genres">3. What genres does it fall under? <code>[select up to 3]</code></label>
+                    <select id="genre">
+                        <option>Rougelite</option>
+                        <option>Rougelike</option>
+                    </select>
+                </div>
+
+                <button type="submit">Submit</button>
+
+            </form>
+
+            <div id="result"></div>
+        </div>
+
+        <script>
+            document.getElementById('surveyForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const responses = {
+                    name: document.getElementById('name').value,
+                    genre: document.getElementById('genre').value,
+                };
+
+                const resultDiv = document.getElementById('result');
+                resultDiv.style.display = 'block';
+
+                resultDiv.innerHTML = `
+                    <h3>Submitted Responses</h3>
+                    <p><strong>Name:</strong> ${responses.name}</p>
+
+                    <p><strong>Genre:</strong> ${responses.genre}</p>
+
+                `;
+
+                console.log("Form Data:", responses);
+            });
+        </script>
+
+</body>
+</html>
