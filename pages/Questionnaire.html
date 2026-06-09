@@ -34,12 +34,35 @@
                     </label>
                 </div>
 
+                
                 <div class="question">
-                    <label for="genres">3. What genres does it fall under? <code>[select up to 3]</code></label>
-                    <select id="genre">
-                        <option>Rougelite</option>
-                        <option>Rougelike</option>
-                    </select>
+                    <label for="genres">3. What genres does it fall under? <code>[Try to limit to three]</code></label>
+                    <label>
+                        <input type="checkbox" name="genres" value="Strategy"> Strategy</label>
+
+                        <label><input type="checkbox" name="genres" value="Action"> Action</label>
+
+                        <label><input type="checkbox" name="genres" value="Arcade"> Arcade</label>
+
+                        <label><input type="checkbox" name="genres" value="Turn-Based"> Turn-Based</label>
+
+                        <label><input type="checkbox" name="genres" value="Dungeon Crawler"> Dungeon Crawler</label>
+
+                        <label><input type="checkbox" name="genres" value="Bullet Hell"> Bullet Hell</label>
+
+                        <label><input type="checkbox" name="genres" value="Survival"> Survival</label>
+
+                        <label><input type="checkbox" name="genres" value="Shoot-em up"> Shoot-em up</label>
+
+                        <label><input type="checkbox" name="genres" value="Hack and Slash"> Hack and Slash</label>
+
+                        <label><input type="checkbox" name="genres" value="RPG"> RPG</label>
+
+                        <label><input type="checkbox" name="genres" value="Metroidvania"> Metroidvania</label>
+
+                        <label><input type="checkbox" name="genres" value="Card Game"> Card Game</label>
+
+                        <label><input type="checkbox" name="genres" value="Deck Builder"> Deck Builder</label>
                 </div>
 
                 <button type="submit">Submit</button>
@@ -55,18 +78,19 @@
 
                 const responses = {
                     name: document.getElementById('name').value,
-                    genre: document.getElementById('genre').value,
+                    rougetype: document.querySelector('input[name="rougetype"]:checked')?.value,
+                    genres: Array.from(document.querySelectorAll('input[name="genres"]:checked')).map(checkbox => checkbox.value),
                 };
 
                 const resultDiv = document.getElementById('result');
                 resultDiv.style.display = 'block';
 
-                resultDiv.innerHTML = `
+                resultDiv.innerHTML = 
+                `
                     <h3>Submitted Responses</h3>
                     <p><strong>Name:</strong> ${responses.name}</p>
-
-                    <p><strong>Genre:</strong> ${responses.genre}</p>
-
+                    <p><strong>Rougetype:</strong> ${responses.rougetype}</p>
+                    <p><strong>Genre:</strong> ${responses.genres}</p>
                 `;
 
                 console.log("Form Data:", responses);
