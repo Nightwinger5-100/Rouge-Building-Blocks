@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html>
-    <html lang="en">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Rouge Questionnaire Form</title>
+    <title>Rogue Questionnaire Form Part One</title>
         <link rel="stylesheet" href="../formStyles.css">
     </head>
 
     <body>
 
         <div class="form-container">
-            <h1>User Survey</h1>
+            <h1>Rogue Questionnaire <code>(Part One)</code></h1>
 
-            <form id="surveyForm">
+            <form id="questionnaireForm">
 
                 <div class="question">
                     <label for="name">1. What is your game's name?</label>
@@ -21,16 +20,16 @@
                 </div>
                 
                 <div class="question">
-                    <label for="rougetype">2. Is it a rougelite or rougelike?</label>
+                    <label for="roguetype">2. Is it a rougelite or rougelike?</label>
                     
                     <label class="radio-option">
-                        <input type="radio" id="roguelite" name="rougetype" value="roguelite">
+                        <input type="radio" id="roguelite" name="roguetype" value="roguelite">
                             Roguelite
                     </label>
 
                     <label class="radio-option">
-                        <input type="radio" id="rougelike" name="rougetype" value="rougelike">
-                            Rougelike
+                        <input type="radio" id="rougelike" name="roguetype" value="roguelike">
+                            Roguelike
                     </label>
                 </div>
 
@@ -65,37 +64,36 @@
                         <label><input type="checkbox" name="genres" value="Deck Builder"> Deck Builder</label>
                 </div>
 
-                <button type="submit">Submit</button>
+                <div class="question">
+                    <label for="playtime">4. How long is the average playtime per run?</label>
+                    <label><input type="radio" id="15" name="playtime" value="15">Less than 15 min.</label>
+                    <label><input type="radio" id="30" name="playtime" value="30">15-30 min.</label>
+                    <label><input type="radio" id="60" name="playtime" value="60">30-60 min.</label>
+                    <label><input type="radio" id="90" name="playtime" value="90">60-90 min.</label>
+                    <label><input type="radio" id="120" name="playtime" value="120">90-120 min. </label>
+                    <label><input type="radio" id="120+" name="playtime" value="120+">More than 120 min.</label>
+                </div>
+
+                <button type="submit">
+                    Submit
+                </button>
 
             </form>
 
-            <div id="result"></div>
+            <div id="result" style="display: none;"> </div>
+            
+            <div id="nextSlide" style="display: none;">
+                <button type="Next" >
+                    Next
+                </button>
+            </div>
+            
+
         </div>
 
-        <script>
-            document.getElementById('surveyForm').addEventListener('submit', function(e) {
-                e.preventDefault();
+        <script type="module" src="../FindMostSimilarGame.js"></script>
 
-                const responses = {
-                    name: document.getElementById('name').value,
-                    rougetype: document.querySelector('input[name="rougetype"]:checked')?.value,
-                    genres: Array.from(document.querySelectorAll('input[name="genres"]:checked')).map(checkbox => checkbox.value),
-                };
+    </body>
 
-                const resultDiv = document.getElementById('result');
-                resultDiv.style.display = 'block';
 
-                resultDiv.innerHTML = 
-                `
-                    <h3>Submitted Responses</h3>
-                    <p><strong>Name:</strong> ${responses.name}</p>
-                    <p><strong>Rougetype:</strong> ${responses.rougetype}</p>
-                    <p><strong>Genre:</strong> ${responses.genres}</p>
-                `;
-
-                console.log("Form Data:", responses);
-            });
-        </script>
-
-</body>
 </html>

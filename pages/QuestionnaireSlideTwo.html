@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rouge Questionnaire Form Part Two</title>
+        <link rel="stylesheet" href="../formStyles.css">
+    </head>
+
+    <body>
+
+        <div class="form-container">
+            <h1>Rouge Questionnaire <code>(Part Two)</code></h1>
+
+            <form id="questionaireFormTwo">
+
+                <div class="question">
+                    <label for="classes">5. How many different classes/characters/decks can the player choose?</label>
+                    <label><input type="radio" id="0" name="classes" value="0">0 <code>[none]</code></label>
+                    <label><input type="radio" id="3" name="classes" value="3">1-3</label>
+                    <label><input type="radio" id="7" name="classes" value="7">4-7</label>
+                    <label><input type="radio" id="10" name="classes" value="10">8-10</label>
+                    <label><input type="radio" id="10+" name="classes" value="10+">10+</label>
+                </div>
+
+                <div class="question">
+                    <label for="classes">6. How many permanent upgrades can the player unlock for those classes/characters/decks</label>
+                    <label><input type="radio" id="0" name="perma_upgrades" value="0">0 <code>[none]</code></label>
+                    <label><input type="radio" id="3" name="classes" value="3">1-3</label>
+                    <label><input type="radio" id="10" name="classes" value="10">4-10</label>
+                    <label><input type="radio" id="20" name="classes" value="20">10-20</label>
+                    <label><input type="radio" id="20+" name="classes" value="20+">20+</label>
+                </div>
+
+                <div class="question">
+                    <label for="classes">7. How many items are in the game to equip onto classes/characters/decks in a run</label>
+                    <label><input type="radio" id="0" name="equippable_items" value="0">0 <code>[none]</code></label>
+                    <label><input type="radio" id="10" name="equippable_items" value="10">1-10</label>
+                    <label><input type="radio" id="30" name="equippable_items" value="7">11-30</label>
+                    <label><input type="radio" id="50" name="equippable_items" value="50">31-50</label>
+                    <label><input type="radio" id="100" name="equippable_items" value="100">51-100</label>
+                    <label><input type="radio" id="200" name="equippable_items" value="200">101-200</label>
+                    <label><input type="radio" id="500" name="equippable_items" value="500">201-500</label>
+                    <label><input type="radio" id="500+" name="equippable_items" value="500+">501+</label>
+                </div>
+
+                <div class="question">
+                    <label for="classes">8. How many of those items can the player unlock to see in future runs?</label>
+                    <label><input type="radio" id="0" name="unlockable_items" value="0">0 <code>[none]</code></label>
+                    <label><input type="radio" id="10" name="unlockable_items" value="10">1-10</label>
+                    <label><input type="radio" id="30" name="unlockable_items" value="7">11-30</label>
+                    <label><input type="radio" id="50" name="unlockable_items" value="50">31-50</label>
+                    <label><input type="radio" id="100" name="unlockable_items" value="100">51-100</label>
+                    <label><input type="radio" id="200" name="unlockable_items" value="200">101-200</label>
+                    <label><input type="radio" id="500" name="unlockable_items" value="500">201-500</label>
+                    <label><input type="radio" id="500" name="unlockable_items" value="500+">501+</label>
+                </div>
+                
+
+                <button type="submit">
+                    Submit
+                </button>
+
+            </form>
+
+            <div id="result"></div>
+        </div>
+        <script type="module" src="FindMostSimilarGame.js"></script>
+
+        <script>
+            document.getElementById('questionaireForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const responses = {
+                    name: document.getElementById('name').value,
+                    rougetype: document.querySelector('input[name="rougetype"]:checked')?.value,
+                    genres: Array.from(document.querySelectorAll('input[name="genres"]:checked')).map(checkbox => checkbox.value),
+                };
+
+                const resultDiv = document.getElementById('result');
+                resultDiv.style.display = 'block';
+
+                resultDiv.innerHTML = 
+                `
+                    <h3>Submitted Responses</h3>
+                    <p><strong>Name:</strong> ${responses.name}</p>
+                    <p><strong>Rougetype:</strong> ${responses.rougetype}</p>
+                    <p><strong>Genre:</strong> ${responses.genres}</p>
+                `;
+
+                console.log("Form Data:", responses);
+            });
+        </script>
+
+        
+
+</body>
+</html>
