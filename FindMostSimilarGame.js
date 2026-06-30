@@ -1,45 +1,62 @@
-console.log("FindMostSimilarGame loaded");
-import { games } from './storedGames.js';
+//get the stored games to compare values
+import { games } from "./storedGames.js";
+const resultDiv = document.getElementById("result");
 
+//each choice thats asimilar increaers the "score value" Game with the highest score wins
 function compareGame(userResponses, game) {
     let score = 0;
 
-    if (userResponses.rougetype === game.rougetype) {
+    if (userResponses.roguetype === game.roguetype) {
         score += 2;
     }
 
+    //get each matching item in the array and add it to the score
     const matchingGenres = userResponses.genres.filter(
-        genre => game.genres.includes(genre)
+        genre => game.genres.includes(genre) //function(genre){return game.genres.includes(genre);}
     );
-
+    
     score += matchingGenres.length;
 
     if (userResponses.playtime === game.playtime) {
         score += 1;
     }
 
+    if (userResponses.classes === game.classes) {
+        score += 1;
+    }
+
+    if (userResponses.perma_upgrades === game.perma_upgrades) {
+        score += 1;
+    }
+
+    if (userResponses.equippable_items === game.equippable_items) {
+        score += 1;
+    }
+
+    if (userResponses.unlockable_items === game.unlockable_items) {
+        score += 1;
+    }
+
     return score;
 }
 
-document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    console.log("Form submitted");
-
-    document.getElementById("result").style.display = "block";
-
+//get all the responses
+if (resultDiv) {
     const responses = {
-        name: document.getElementById('name').value,
-        rougetype: document.querySelector('input[name="rougetype"]:checked')?.value,
-        genres: Array.from(
-            document.querySelectorAll('input[name="genres"]:checked')
-        ).map(checkbox => checkbox.value),
-        playtime: document.querySelector('input[name="playtime"]:checked')?.value,
+        name: localStorage.getItem("gameName"),
+        roguetype: localStorage.getItem("rogueType"),
+        genres: JSON.parse(localStorage.getItem("genres") || "[]"),
+        playtime: localStorage.getItem("playtime"),
+        classes: localStorage.getItem("classes"),
+        perma_upgrades: localStorage.getItem("perma_upgrades"),
+        equippable_items: localStorage.getItem("equippable_items"),
+        unlockable_items: localStorage.getItem("unlockable_items")
     };
 
     let bestMatch = null;
     let highestScore = -1;
 
+    //find the highest score out of all the games and games and return that game and score
     for (const game of games) {
         const score = compareGame(responses, game);
 
@@ -49,95 +66,10 @@ document.getElementById('questionnaireForm').addEventListener('submit', function
         }
     }
 
-    const resultDiv = document.getElementById('result');
-    console.log(bestMatch);
-    console.log(highestScore);
-    console.log(resultDiv);
     resultDiv.innerHTML = `
-        <h3>Closest Match</h3>
-        <p>${bestMatch.name}</p>
-        <p>Score: ${highestScore}</p>
+        <h2>${bestMatch.name}</h2>
+        <p>Match Score: ${highestScore}</p>
+        <p>Roguetype: ${bestMatch.roguetype}</p>
+        <p>Genres: ${bestMatch.genres.join(", ")}</p>
     `;
-});
-
-document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    console.log("Form submitted");
-
-    document.getElementById("result").style.display = "block";
-
-    document.getElementById("nextSlide").style.display = "block";
-
-    const responses = {
-        name: document.getElementById('name').value,
-        rougetype: document.querySelector('input[name="rougetype"]:checked')?.value,
-        genres: Array.from(
-            document.querySelectorAll('input[name="genres"]:checked')
-        ).map(checkbox => checkbox.value),
-        playtime: document.querySelector('input[name="playtime"]:checked')?.value,
-    };
-
-    let bestMatch = null;
-    let highestScore = -1;
-
-    for (const game of games) {
-        const score = compareGame(responses, game);
-
-        if (score > highestScore) {
-            highestScore = score;
-            bestMatch = game;
-        }
-    }
-
-    const resultDiv = document.getElementById('result');
-    console.log(bestMatch);
-    console.log(highestScore);
-    console.log(resultDiv);
-    resultDiv.innerHTML = `
-        <h3>Closest Match</h3>
-        <p>${bestMatch.name}</p>
-        <p>Score: ${highestScore}</p>
-    `;
-});
-
-document.getElementById('questionnaireFormTwo').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    console.log("Form submitted");
-
-    document.getElementById("result").style.display = "block";
-
-    document.getElementById("nextSlide").style.display = "block";
-
-    const responses = {
-        name: document.getElementById('name').value,
-        rougetype: document.querySelector('input[name="rougetype"]:checked')?.value,
-        genres: Array.from(
-            document.querySelectorAll('input[name="genres"]:checked')
-        ).map(checkbox => checkbox.value),
-        playtime: document.querySelector('input[name="playtime"]:checked')?.value,
-    };
-
-    let bestMatch = null;
-    let highestScore = -1;
-
-    for (const game of games) {
-        const score = compareGame(responses, game);
-
-        if (score > highestScore) {
-            highestScore = score;
-            bestMatch = game;
-        }
-    }
-
-    const resultDiv = document.getElementById('result');
-    console.log(bestMatch);
-    console.log(highestScore);
-    console.log(resultDiv);
-    resultDiv.innerHTML = `
-        <h3>Closest Match</h3>
-        <p>${bestMatch.name}</p>
-        <p>Score: ${highestScore}</p>
-    `;
-});
+}

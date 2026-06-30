@@ -23,12 +23,12 @@
                     <label for="roguetype">2. Is it a rougelite or rougelike?</label>
                     
                     <label class="radio-option">
-                        <input type="radio" id="roguelite" name="roguetype" value="roguelite">
+                        <input type="radio" id="roguelite" name="roguetype" value="roguelite" required>
                             Roguelite
                     </label>
 
                     <label class="radio-option">
-                        <input type="radio" id="rougelike" name="roguetype" value="roguelike">
+                        <input type="radio" id="rougelike" name="roguetype" value="roguelike" required>
                             Roguelike
                     </label>
                 </div>
@@ -66,32 +66,31 @@
 
                 <div class="question">
                     <label for="playtime">4. How long is the average playtime per run?</label>
-                    <label><input type="radio" id="15" name="playtime" value="15">Less than 15 min.</label>
+                    <label><input type="radio" id="15" name="playtime" value="15" required>Less than 15 min.</label>
                     <label><input type="radio" id="30" name="playtime" value="30">15-30 min.</label>
                     <label><input type="radio" id="60" name="playtime" value="60">30-60 min.</label>
                     <label><input type="radio" id="90" name="playtime" value="90">60-90 min.</label>
                     <label><input type="radio" id="120" name="playtime" value="120">90-120 min. </label>
                     <label><input type="radio" id="120+" name="playtime" value="120+">More than 120 min.</label>
                 </div>
-
-                <button type="submit">
-                    Submit
-                </button>
-
             </form>
 
             <div id="result" style="display: none;"> </div>
             
-            <div id="nextSlide" style="display: none;">
-                <button type="Next" >
+<!--Go to the next slide when the nextSlide button is pressed-->            
+            <div id="nextSlide" style="display: flex;">
+                <button id="nextBtn" type="Next" onclick="window.location.href='QuestionnaireSlideTwo.html'" >
                     Next
                 </button>
             </div>
+
+            
             
 
         </div>
 
-        <script type="module" src="../FindMostSimilarGame.js"></script>
+        
+        <script src="../questionnaire.js"></script>
 
     </body>
 

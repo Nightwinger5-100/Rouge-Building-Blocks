@@ -1,0 +1,10 @@
+document.getElementById("next1").addEventListener("click", () => {
+    const name = document.getElementById("name");
+
+    if (name.checkValidity()) {
+        document.getElementById("page1").style.display = "none";
+        document.getElementById("page2").style.display = "block";
+    } else {
+        name.reportValidity();
+    }
+});

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire Results</title>
+    <link rel="stylesheet" href="../formStyles.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Your Closest Match</h1>
+
+        <div id="result">
+            <p>Calculating match...</p>
+        </div>
+
+        <button
+            type="button"
+            onclick="window.location.href='QuestionnaireSlideOne.html'">
+            Start Over
+        </button>
+
+        <button
+            type="button"
+            onclick="window.location.href='ImproveRogueSlide.html'">
+            Next
+        </button>
+    </div>
+
+    <script type="module" src="../FindMostSimilarGame.js"></script>
+
+</body>
+</html>
