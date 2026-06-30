@@ -51,7 +51,7 @@ if (resultDiv) {
         perma_upgrades: localStorage.getItem("perma_upgrades"),
         equippable_items: localStorage.getItem("equippable_items"),
         unlockable_items: localStorage.getItem("unlockable_items")
-    };
+    }
 
     let bestMatch = null;
     let highestScore = -1;
@@ -65,6 +65,9 @@ if (resultDiv) {
             bestMatch = game;
         }
     }
+
+    //store the result
+    localStorage.setItem("most_similar_game", bestMatch.name);
 
     resultDiv.innerHTML = `
         <h2>${bestMatch.name}</h2>
