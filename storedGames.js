@@ -1,4 +1,7 @@
 //current list of games
+//The brightness values have already been calculated, I'm just storing them so they don't need to be calculated every time
+//But I do also store the image for each game
+
 export const games = [
     {
         name: "Hades",
@@ -9,6 +12,18 @@ export const games = [
         perma_upgrades: "20+",
         equippable_items: "200",
         unlockable_items: "500+",
+
+        screenshots: {
+            low: "./images/imageCompare/Hades/low_Hades.png",
+            med: "./images/imageCompare/Hades/med_Hades.png",
+            high: "./images/imageCompare/Hades/high_Hades.png"
+        },
+
+        brightness: {
+        low: 75,
+        med: 52,
+        high: 70
+        },
 
         advice: {
             replayability:
@@ -28,6 +43,18 @@ export const games = [
         genres: ["Action", "Bullet Hell", "Dungeon Crawler"],
         playtime: "30",
 
+        screenshots: {
+            low: "./images/imageCompare/Issac/low_Issac.png",
+            med: "./images/imageCompare/Issac/med_Issac.png",
+            high: "./images/imageCompare/Issac/high_Issac.png"
+        },
+
+        brightness: {
+        low: 33,
+        med: 51,
+        high: 53
+        },
+
         advice: {
             replayability:
                 "Isaac contains tons of replayability from it's massive item variety, item synergies, alternate paths, and many unlockable characters.",
@@ -45,6 +72,18 @@ export const games = [
         roguetype: "roguelite",
         genres: ["Card Game", "Deck Builder", "Strategy"],
         playtime: "60",
+
+        screenshots: {
+            low: "./images/SlayTheSpire/low_StS.png",
+            med: "./images/SlayTheSpire/med_StS.png",
+            high: "./images/HadeSlayTheSpires/high_StS.png"
+        },
+
+        brightness: {
+        low: 43,
+        med: 46,
+        high: 53
+        },
 
         advice: {
             replayability:

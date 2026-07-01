@@ -17,7 +17,7 @@
 
                 <div class="question">
                     <label for="classes">5. How many different classes/characters/decks can the player choose?</label>
-                    <label><input type="radio" id="classes_0" name="classes" value="1">0-1 <code>[none]</code></label>
+                    <label><input type="radio" id="classes_0" name="classes" value="1" required>0-1 <code>[none]</code></label>
                     <label><input type="radio" id="classes_3" name="classes" value="3">2-3</label>
                     <label><input type="radio" id="classes_7" name="classes" value="7">4-7</label>
                     <label><input type="radio" id="classes_10" name="classes" value="10">8-10</label>
@@ -59,9 +59,11 @@
                 </div>
                 
 
-                <button type="submit">
-                    Submit
-                </button>
+                <div id="nextSlide" style="display: flex;">
+                    <button id="nextBtn" type="button" >
+                        Next
+                    </button>
+                </div>
 
             </form>
 
@@ -84,5 +86,5 @@
 
         
 
-</body>
+    </body>
 </html>

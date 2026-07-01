@@ -48,7 +48,10 @@ if (pageOneForm) {
 const pageTwoForm = document.getElementById("questionnaireFormTwo");
 
 if (pageTwoForm) {
-    pageTwoForm.addEventListener("submit", () => { //function() {
+    const nextBtn = document.getElementById("nextBtn");
+
+    //when the next button is clicked
+    nextBtn.addEventListener("click", () => { //function() {
         //prevent refresh
         event.preventDefault();
 
@@ -77,9 +80,145 @@ if (pageTwoForm) {
         )
 
         //move to results page
-        window.location.href = "QuestionnaireResults.html";
+        window.location.href = "QuestionnaireSlideThree.html";
     })
 
+}
+
+//calcs the brightness of the pixels
+function calculateBrightness(imageData) {
+
+    //get an array of the pixel rgb data
+    const pixels = imageData.data;
+
+    let totalBrightness = 0;
+
+    for (let i = 0; i < pixels.length; i += 4) {
+
+        const r = pixels[i];
+        const g = pixels[i + 1];
+        const b = pixels[i + 2];
+
+        totalBrightness +=
+            (r + g + b) / 3;
+    }
+
+    return totalBrightness /
+        (pixels.length / 4);
+}
+
+//gets the brightness of each file and stores it
+function analyzeImage(file, intensity) {
+
+    const img = new Image();
+
+    img.onload = () => { //function () {
+
+        //make a canvas allowing the ability to check the pixels
+        const canvas =
+            document.createElement("canvas");
+
+        //return the drawing context allowing pixel operations
+        const ctx =
+            canvas.getContext("2d");
+
+        //match the canvas width/height to the file
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        //copy the image
+        ctx.drawImage(img, 0, 0);
+
+        const imageData =
+            ctx.getImageData(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+        const brightness =
+            calculateBrightness(imageData);
+        
+        //store the brightness
+        localStorage.setItem(
+            intensity + "_brightness",
+            brightness
+        );
+
+        console.log(
+            intensity,
+            "brightness:",
+            brightness
+        );
+    };
+
+    //get the image as a url to be able to be loaded
+    img.src = URL.createObjectURL(file);
+}
+
+//sends each image to be analzyed
+function processUploadedImages() {
+
+    const lowFile =
+        document.getElementById("lowImage").files[0];
+
+    const medFile =
+        document.getElementById("medImage").files[0];
+
+    const highFile =
+        document.getElementById("highImage").files[0];
+
+    //if any are missing don't continue
+    if (!lowFile || !medFile || !highFile) {
+        console.log("No images uploaded");
+        return;
+    }
+
+    analyzeImage(lowFile, "low");
+    analyzeImage(medFile, "med");
+    analyzeImage(highFile, "high");
+}
+
+function handleImageCalcs() {
+
+    // Analyze uploaded screenshots
+    processUploadedImages();
+
+    console.log("Page Three Complete");
+}
+
+const pageThreeForm = document.getElementById("questionnaireFormThree")
+
+if(pageThreeForm){
+    const skipBtn = document.getElementById("skipBtn");
+    pageThreeForm.addEventListener("submit", (event) => { //function() {
+        //prevent refresh
+        event.preventDefault();
+
+        //check if all required questions were answered
+        if (!pageThreeForm.checkValidity()) {
+            pageThreeForm.reportValidity();
+            return;
+        }
+
+        //calls function and stores it
+        handleImageCalcs();
+
+        //move to results page
+        window.location.href = "QuestionnaireResults.html";
+        
+    })
+    skipBtn.addEventListener("click", () => { //function() {
+        //prevent refresh
+        event.preventDefault();
+
+        //move to results page
+        window.location.href = "QuestionnaireResults.html";
+        
+    })
+
+    
 }
 
 const improveForm = document.getElementById("improveForm");

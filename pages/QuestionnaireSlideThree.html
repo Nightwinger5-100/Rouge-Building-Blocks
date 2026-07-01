@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rouge Questionnaire Form Part Two</title>
+        <link rel="stylesheet" href="../formStyles.css">
+
+        <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
+    </head>
+
+    <body>
+
+        <div class="form-container">
+            <h1>Rouge Questionnaire <code>(Part Three)[optional]</code></h1>
+
+            <form id="questionnaireFormThree">
+
+                <div class="images">
+                <label for="images">Import three images to help better compare</label>
+                    <div class="question">
+                        <label for="lowImage">Low Intensity Screenshot</label>
+                        <input type="file" id="lowImage" accept="image/*" required>
+                    </div>
+
+                    <div class="question">
+                        <label for="medImage">Medium Intensity Screenshot</label>
+                        <input type="file" id="medImage" accept="image/*" required>
+                    </div>
+
+                    <div class="question">
+                        <label for="highImage">High Intensity Screenshot</label>
+                        <input type="file" id="highImage" accept="image/*" required>
+                    </div>
+                </div>
+
+                <button type="submit">
+                    Submit
+                </button>
+
+                <button type="button" id="skipBtn">
+                    Skip
+                </button>
+
+            </form>
+
+            
+
+<!--Go to the prev slide when the nextSlide button is pressed-->       
+            <div id="prevSlide" style="display: flex;">
+                <button type="button" onclick="window.location.href='QuestionnaireSlideTwo.html'" >
+                    Prev
+                </button>
+            </div>
+            
+        </div>
+
+        
+        
+        <script src="../questionnaire.js"></script>
+
+        
+
+        
+
+</body>
+</html>

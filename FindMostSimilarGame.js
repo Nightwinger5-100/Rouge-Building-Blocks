@@ -2,6 +2,16 @@
 import { games } from "./storedGames.js";
 const resultDiv = document.getElementById("result");
 
+//the difference of brightness between low, med, and high actvity
+function compareBrightness(userBrightness, game) {
+
+    return (
+        Math.abs(userBrightness.low - game.brightness.low) +
+        Math.abs(userBrightness.med - game.brightness.med) +
+        Math.abs(userBrightness.high - game.brightness.high)
+    );
+}
+
 //each choice thats asimilar increaers the "score value" Game with the highest score wins
 function compareGame(userResponses, game) {
     let score = 0;
@@ -36,6 +46,41 @@ function compareGame(userResponses, game) {
     if (userResponses.unlockable_items === game.unlockable_items) {
         score += 1;
     }
+
+    //Brightness stuff is optional
+    const lowBrightness = localStorage.getItem("low_brightness");
+
+    const medBrightness = localStorage.getItem("med_brightness");
+
+    const highBrightness = localStorage.getItem("high_brightness");
+
+    // Only compare screenshots if user uploaded them
+    if (lowBrightness && medBrightness && highBrightness) {
+
+        
+        const userBrightness = {
+            low: Number(lowBrightness),
+            med: Number(medBrightness),
+            high: Number(highBrightness)
+        };
+
+        //get the difference of brightness
+        const brightnessDifference = compareBrightness(userBrightness, game);
+
+        // less difference = more similar
+
+        console.log("The brightness difference is: " + brightnessDifference);
+        if (brightnessDifference < 15) {
+            score += 3;
+        }
+        else if (brightnessDifference < 30) {
+            score += 2;
+        }
+        else if (brightnessDifference < 50) {
+            score += 1;
+        }
+    }
+
 
     return score;
 }
